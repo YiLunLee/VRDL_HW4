@@ -9,62 +9,47 @@ $ conda env create -f environment.yml
 ```
 And install following packages:
 ```
+$ pip install imageio
 $ pip install opencv-python
-$ pip install yaml
-$ pip install matplotlib
-$ pip install tqdm
-$ pip install scipy
+$ pip install pandas
+$ pip install flags
+$ pip install scipy==1.2.2
 ```
 
 ## Prepare Dataset
-Split the train data into train_set and validate set
-Put the train image in the train folder: ./vrdl_data/images/train_set
-
-
+Unzip the given dataset and put it in vrdl_data folder
 The dataset folder should be like:
 ```
 ./vrdl_data
-  |---train_set.txt
-  |---val.txt
-  |---test.txt
-  |---images
-        |---train_set
-              |---xxxx.png
-              |---xxxx.png
-                    .
-                    .
-        |---val        
-              |---xxxx.png
-              |---xxxx.png
-                    .
-                    .
-        |---test        
-              |---xxxx.png
-              |---xxxx.png
-                    .
-                    .
-  |---labels
-        |---train_set
-              |---xxxx.txt
-              |---xxxx.txt
-                    .
-                    .
-        |---val        
-              |---xxxx.txt
-              |---xxxx.txt
-                    .
-                    .
+  |---training_hr_images/training_hr_images/*.png
+  |---testing_lr_images/testing_lr_images/*.png
+  
+```
+
+(For Training) For preparing training data, run the below code to genearate more training samples.
+(Please make sure that the data directory is same as above form)
+```
+$ python Prepare_TrainData_HR_LR_VRDL.py
+$ python Prepare_val_data.py
 ```
 
 ## Training Code
-1. 
-
+Start training with following command:
+```
+$ python train.py -opt ./options/train/train_SRFBN_VRDL.json
+```
 
 ## Evaluation code
+1. download the pretrained model bellow and put it at ./submission.pth
+2. Run the testing code:
+```
+$ python test.py -opt ./options/test/test_SRFBN_VRDL.json
+```
+
 
 ## Download Pretrained Models
 Here is the model weight of my final submission. Please download the weights and run the above evaluation code.
-+ [Final_submission_weights](https://drive.google.com/file/d/1g-omXmyRrkKfIlSiu8pBUuowMgy9SBms/view?usp=sharing)
++ [Final_submission_weights](https://drive.google.com/file/d/10v-yK4QhxlcpL8qfjagMWafwa89ZD_Y9/view?usp=sharing)
 
 ## Reference
 My howework references the codes in the following repos. Thanks for thier works and sharing.
